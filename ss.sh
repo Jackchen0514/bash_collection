@@ -66,4 +66,5 @@ apt-get install nginx -y
 sed -i 's/80/8081/g' /etc/nginx/sites-enabled/default
 nginx -s reload
 
+echo "enter ssh root passwd"
 ssh root@${home_domain} "firewall-cmd --add-forward-port=port=${home_port}:proto=tcp:toaddr=${current_ip}:toport=${ss_port} --permanent;firewall-cmd --add-forward-port=port=${home_port}:proto=udp:toaddr=${current_ip}:toport=${ss_port} --permanent;firewall-cmd --reload;firewall-cmd --list-all"
