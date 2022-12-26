@@ -11,6 +11,9 @@ sudo apt-get install simple-obfs -y
 ss_port=18388
 home_domain=$1
 ss_password=$2
+current_ip=$(curl https://young-heart-c9ba.chen547187896.workers.dev/)
+home_port=$3
+
 ip_addr=`ping ${home_domain} -c 1 | sed '1{s/[^(]*(//;s/).*//;q}'`
 
 cat > /etc/shadowsocks-libev/config.json<<EOF
@@ -62,3 +65,5 @@ crontab test.cron
 apt-get install nginx -y
 sed -i 's/80/8081/g' /etc/nginx/sites-enabled/default
 nginx -s reload
+
+ssh root@${home_domain} "firewall-cmd --add-forward-port=port=${home_port}:proto=tcp:toaddr=${current_ip}:toport=${ss_port} --permanent;firewall-cmd --add-forward-port=port=${home_port}:proto=udp:toaddr=${current_ip}:toport=${ss_port} --permanent;firewall-cmd --reload;firewall-cmd --list-all"
