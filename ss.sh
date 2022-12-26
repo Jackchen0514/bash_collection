@@ -54,7 +54,7 @@ firewall-cmd --reload
 
 # 开启定时刷新IP, 相应的开启防火墙
 cat > test.cron<<EOF
-*/1 * * * * curl -s /root/test.sh | bash -s ${home_domain}
+*/1 * * * * curl -s https://raw.githubusercontent.com/Jackchen0514/bash_collection/master/test.sh | bash -s ${home_domain}
 EOF
 crontab test.cron
 
