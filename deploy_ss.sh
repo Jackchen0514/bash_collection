@@ -15,8 +15,8 @@ cat > /etc/shadowsocks-libev/config.json<<EOF
 {
     "server":["0.0.0.0"],
     "mode":"tcp_and_udp",
-    "server_port":12345,
-    "local_port":${ss_port},
+    "server_port":${ss_port},
+    "local_port": 1080,
     "password":"${ss_password}",
     "timeout":600,
     "method":"chacha20-ietf-poly1305",
