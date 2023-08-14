@@ -24,6 +24,8 @@ Restart=on-failure
 WantedBy=multi-user.target
 EOF
 
+mkdir -p /usr/local/etc/trojan-go
+
 cat > /usr/local/etc/trojan-go/forward-${name}.json << EOF
 {
     "run_type": "forward",
