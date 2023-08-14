@@ -34,8 +34,7 @@ systemctl restart shadowsocks-libev
 sleep 1
 
 # nginx 8081
-apt-get install nginx -y
-cat > /etc/nginx/conf.d/${proxy_host}.conf << EOF
+cat > /etc/nginx/conf.d/${proxy_host}_nginx.conf << EOF
 server {
       listen 8081;
       server_name _;
