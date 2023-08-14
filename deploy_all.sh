@@ -210,6 +210,12 @@ sudo apt-get remove simple-obfs -y
 systemctl daemon-reload
 EOF
 
+########################## open bbr
+echo net.core.default_qdisc=fq >> /etc/sysctl.conf
+echo net.ipv4.tcp_congestion_control=bbr >> /etc/sysctl.conf
+sysctl -p
+sysctl net.ipv4.tcp_available_congestion_control
+
 sleep 1
 echo -e "trojan: \033[31m \n${domain} \nport: 443 \npassword: ${trojan_password}\n \033[0m"
 echo -e "ss: \033[31m \n${domain} \nport: ${local_port} \nmethod: chacha20-ietf-poly1305 \npassword: ${ss_password} \nobfs: http,host: ${domain}\n \033[0m"
