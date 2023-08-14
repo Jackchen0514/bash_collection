@@ -2,8 +2,8 @@
 
 name=$1
 proxy_host=$2
-target_addr=$3
-target_port=$4
+ss_ip=$3
+ss_port=$4
 local_port=$5
 trojan_password=$6
 
@@ -31,8 +31,8 @@ cat > /usr/local/etc/trojan-go/forward-${name}.json << EOF
     "local_port": ${local_port},
     "remote_addr": "${proxy_host}",
     "remote_port": 443,
-    "target_addr": "${target_addr}",
-    "target_port": ${target_port},
+    "target_addr": "${ss_ip}",
+	  "target_port": ${ss_port},
     "password": [
         "${trojan_password}"
     ]
@@ -43,7 +43,4 @@ sleep 1
 systemctl enable trojan-forward-${name}
 systemctl restart trojan-forward-${name}
 
-firewall-cmd --permanent --zone=public --add-port=${local_port}/tcp
-firewall-cmd --permanent --zone=public --add-port=${local_port}/udp
-firewall-cmd --reload
 echo "done"
