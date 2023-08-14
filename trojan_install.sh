@@ -8,7 +8,7 @@ sudo systemctl start nginx
 
 wget https://github.com/ChunibyouH/GuoKer/archive/refs/heads/master.zip
 // nginx static address
-unzip -d　/var/www/html master.zip
+unzip -d　/var/www/ master.zip
 
 domain=$1
 
@@ -18,7 +18,7 @@ server {
     listen [::]:80;
     listen 81 http2;
     server_name ${domain};
-    root /var/www/html/GuoKer-master;
+    root /var/www/GuoKer-master;
 }
 EOF
 
