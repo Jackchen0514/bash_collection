@@ -213,5 +213,5 @@ sudo apt-get remove simple-obfs -y
 systemctl daemon-reload
 EOF
 
-echo 'trojan: \n ${domain} \n port 443 \n password: ${trojan_password} \n'
-echo 'ss: \n ${domain} \n port ${local_port} \n method: chacha20-ietf-poly1305 \n obfs: http;host: ${domain}'
+echo　-e 'trojan: \n ${domain} \n port 443 \n password: ${trojan_password} \n'
+echo -e 'ss: \n ${domain} \n port ${local_port} \n method: chacha20-ietf-poly1305 \n obfs: http;host: ${domain}'
