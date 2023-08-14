@@ -211,7 +211,7 @@ systemctl daemon-reload
 EOF
 
 sleep 1
-echo -e "trojan: \n${domain} \nport: 443 \npassword: ${trojan_password}\n"
-echo -e "ss: \n${domain} \nport: ${local_port} \nmethod: chacha20-ietf-poly1305 \npassword: ${ss_password} \nobfs: http,host: ${domain}\n"
-echo -e "need open ports: \n443 ${ss_port} ${local_port}\n"
+echo -e "trojan: \033[31m \n${domain} \nport: 443 \npassword: ${trojan_password}\n \033[0m"
+echo -e "ss: \033[31m \n${domain} \nport: ${local_port} \nmethod: chacha20-ietf-poly1305 \npassword: ${ss_password} \nobfs: http,host: ${domain}\n \033[0m"
+echo -e "open ports: \033[31m  \n443 ${ss_port} ${local_port}\n \033[0m"
 echo "done"
