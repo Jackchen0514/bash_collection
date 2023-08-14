@@ -11,7 +11,7 @@ ss_port=$1
 ss_password=$2
 proxy_host=$3
 
-cat > /etc/shadowsocks-libev/config.json<<EOF
+cat > /etc/shadowsocks-libev/config.json << EOF
 {
     "server":["0.0.0.0"],
     "mode":"tcp_and_udp",
@@ -26,14 +26,7 @@ cat > /etc/shadowsocks-libev/config.json<<EOF
 }
 EOF
 
-sleep 1
-
-systemctl enable shadowsocks-libev
-systemctl restart shadowsocks-libev
-
-sleep 1
-
-# nginx 8081
+#nginx 8081
 cat > /etc/nginx/conf.d/${proxy_host}_nginx.conf << EOF
 server {
       listen 8081;
@@ -44,5 +37,8 @@ server {
 }
 EOF
 nginx -s reload
+
+systemctl enable shadowsocks-libev
+systemctl restart shadowsocks-libev
 
 echo "done"
