@@ -1,6 +1,7 @@
 #! /bin/bash
 
 #install nginx
+sudo apt-get update -y
 sudo apt-get install nginx -y
 sudo systemctl enable nginx
 sudo systemctl start nginx
@@ -8,7 +9,7 @@ sudo systemctl start nginx
 
 wget https://github.com/ChunibyouH/GuoKer/archive/refs/heads/master.zip
 // nginx static address
-unzip -d　/var/www/ master.zip
+unzip -d /var/www/ master.zip
 
 domain=$1
 
