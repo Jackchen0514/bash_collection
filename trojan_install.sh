@@ -32,8 +32,8 @@ unzip -d /usr/share/trojan-go trojan-go-linux-amd64.zip
 
 cp /usr/share/trojan-go/trojan-go /usr/local/bin
 
-cp trojan.key /usr/share/trojan-go/${domain}.key
-cp trojan.crt /usr/share/trojan-go/${domain}.crt
+cp ${domain}.key /usr/share/trojan-go/${domain}.key
+cp ${domain}.pem /usr/share/trojan-go/${domain}.pem
 
 cat > /usr/share/trojan-go/config.json << EOF
 {
@@ -46,7 +46,7 @@ cat > /usr/share/trojan-go/config.json << EOF
         "Carlosx0514!"
     ],
     "ssl": {
-        "cert": "/usr/share/trojan-go/${domain}.crt",
+        "cert": "/usr/share/trojan-go/${domain}.pem",
         "key": "/usr/share/trojan-go/${domain}.key",
         "sni": "${domain}"
     },
