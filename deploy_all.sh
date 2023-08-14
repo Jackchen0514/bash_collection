@@ -41,9 +41,9 @@ nginx -s reload
 
 
 #install trojan
-wget https://github.com/p4gefau1t/trojan-go/releases/download/v0.10.6/trojan-go-linux-amd64.zip
+wget https://github.com/p4gefau1t/trojan-go/releases/download/v0.10.6/trojan-go-linux-$(dpkg --print-architecture).zip
 
-unzip -d /usr/share/trojan-go trojan-go-linux-amd64.zip
+unzip -d /usr/share/trojan-go trojan-go-linux-$(dpkg --print-architecture).zip
 
 cp /usr/share/trojan-go/trojan-go /usr/local/bin
 
