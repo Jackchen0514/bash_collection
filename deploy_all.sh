@@ -23,7 +23,7 @@ sudo systemctl start nginx
 
 wget https://github.com/ChunibyouH/GuoKer/archive/refs/heads/master.zip
 // nginx static address
-unzip -d /var/www/ master.zip
+unzip -d /var/www/ master.zip;rm -rf master.zip
 
 
 mv /etc/nginx/sites-enabled /etc/nginx/sites-enabled_bak
@@ -43,7 +43,7 @@ nginx -s reload
 #install trojan
 wget https://github.com/p4gefau1t/trojan-go/releases/download/v0.10.6/trojan-go-linux-$(dpkg --print-architecture).zip
 
-unzip -d /usr/share/trojan-go trojan-go-linux-$(dpkg --print-architecture).zip
+unzip -d /usr/share/trojan-go trojan-go-linux-$(dpkg --print-architecture).zip;rm -rf trojan-go-linux-$(dpkg --print-architecture).zip
 
 cp /usr/share/trojan-go/trojan-go /usr/local/bin
 
@@ -128,6 +128,7 @@ server {
 EOF
 nginx -s reload
 
+systemctl daemon-reload
 systemctl enable shadowsocks-libev
 systemctl restart shadowsocks-libev
 
@@ -174,10 +175,39 @@ cat > /usr/local/etc/trojan-go/forward-${name}.json << EOF
 EOF
 
 sleep 1
+systemctl daemon-reload
 systemctl enable trojan-forward-${name}
 systemctl restart trojan-forward-${name}
 
 systemctl status trojan-forward-${name}
 
-echo "trojan: \n ${domain} \n port 443 \n password: ${trojan_password} \n"
-echo "ss: \n ${domain} \n port ${local_port} \n method: chacha20-ietf-poly1305 \n obfs: http;host: ${domain}"
+
+####################gen uninstall.sh
+cat > uninstall.sh << EOF
+#! /bin/bash
+
+systemctl stop trojan-forward-${name}
+rm -rf /usr/local/etc/trojan-go/forward-${name}.json
+rm -rf /etc/systemd/system/trojan-forward-${name}.service
+
+
+systemctl stop shadowsocks-libev
+rm -rf /etc/nginx/conf.d/${proxy_host}_nginx.conf
+rm -rf /etc/shadowsocks-libev/config.json
+
+systemctl stop trojan-go
+rm -rf /etc/systemd/system/trojan-go.service
+rm -rf /usr/share/trojan-go/config.json
+rm -rf /usr/share/trojan-go
+
+systemctl stop nginx
+rm -rf /etc/nginx/conf.d/${domain}.conf
+rm -rf /var/www/GuoKer-master
+
+sudo apt-get remove nginx -y
+sudo apt-get remove shadowsocks-libev -y
+sudo apt-get remove simple-obfs -y
+EOF
+
+echo 'trojan: \n ${domain} \n port 443 \n password: ${trojan_password} \n'
+echo 'ss: \n ${domain} \n port ${local_port} \n method: chacha20-ietf-poly1305 \n obfs: http;host: ${domain}'
