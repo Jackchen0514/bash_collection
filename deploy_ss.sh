@@ -31,9 +31,7 @@ cat > /etc/nginx/conf.d/${proxy_host}_nginx.conf << EOF
 server {
       listen 8081;
       server_name _;
-      location / {
-        proxy_pass  http://${proxy_host}:80;
-      }
+      rewrite ^(.*) https://${proxy_host} permanent;
 }
 EOF
 nginx -s reload
