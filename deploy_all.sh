@@ -136,9 +136,6 @@ systemctl status shadowsocks-libev
 echo "done"
 
 ################################### trojan隧道
-name=$1
-local_port=$5
-trojan_password=$6
 
 cat > /etc/systemd/system/trojan-forward-${name}.service << EOF
 [Unit]
@@ -215,5 +212,5 @@ EOF
 
 sleep 1
 echo -e "trojan: \n${domain} \nport: 443 \npassword: ${trojan_password}\n"
-echo -e "ss: \n${domain} \nport: ${local_port} \nmethod: chacha20-ietf-poly1305 \nobfs: http,host: ${domain}"
+echo -e "ss: \n${domain} \nport: ${local_port} \nmethod: chacha20-ietf-poly1305 \npassword: ${ss_password} \nobfs: http,host: ${domain}"
 echo "done"
