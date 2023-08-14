@@ -212,6 +212,6 @@ EOF
 
 sleep 1
 echo -e "trojan: \n${domain} \nport: 443 \npassword: ${trojan_password}\n"
-echo -e "ss: \n${domain} \nport: ${local_port} \nmethod: chacha20-ietf-poly1305 \npassword: ${ss_password} \nobfs: http,host: ${domain}"
-echo -e "需要打开三个端口: 443 ${ss_port} ${local_port}"
-echo "完成"
+echo -e "ss: \n${domain} \nport: ${local_port} \nmethod: chacha20-ietf-poly1305 \npassword: ${ss_password} \nobfs: http,host: ${domain}\n"
+echo -e "need open ports: \n443 ${ss_port} ${local_port}\n"
+echo "done"
