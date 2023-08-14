@@ -186,6 +186,8 @@ systemctl status trojan-forward-${name}
 cat > uninstall.sh << EOF
 #! /bin/bash
 
+rm -rf *.key *.pem
+
 systemctl stop trojan-forward-${name}
 rm -rf /usr/local/etc/trojan-go/forward-${name}.json
 rm -rf /etc/systemd/system/trojan-forward-${name}.service
@@ -207,6 +209,8 @@ rm -rf /var/www/GuoKer-master
 sudo apt-get remove nginx -y
 sudo apt-get remove shadowsocks-libev -y
 sudo apt-get remove simple-obfs -y
+
+systemctl daemon-reload
 EOF
 
 echo 'trojan: \n ${domain} \n port 443 \n password: ${trojan_password} \n'
