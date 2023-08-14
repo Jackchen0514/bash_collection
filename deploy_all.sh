@@ -178,3 +178,6 @@ systemctl enable trojan-forward-${name}
 systemctl restart trojan-forward-${name}
 
 systemctl status trojan-forward-${name}
+
+echo "trojan: \n ${domain} \n port 443 \n password: ${trojan_password} \n"
+echo "ss: \n ${domain} \n port ${local_port} \n method: chacha20-ietf-poly1305 \n obfs: http;host: ${domain}"
